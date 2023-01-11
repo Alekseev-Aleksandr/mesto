@@ -7,7 +7,7 @@
     display: grid;
     grid-template-areas:
         "image image"
-        "capt button";
+        "capture button";
     grid-template-rows: 282px auto;
     grid-template-columns: auto 72px;
 }

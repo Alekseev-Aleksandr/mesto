@@ -5,7 +5,6 @@
     line-height: 29px;
     width: 189px;
     align-self: center;
-    grid-area: capt;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
