@@ -1,0 +1,13 @@
+.photo-grid__item {
+    margin: 0;
+    background-color: white;
+    width: 282px;
+    height: 361px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-areas:
+        "image image"
+        "capt button";
+    grid-template-rows: 282px auto;
+    grid-template-columns: auto 72px;
+}

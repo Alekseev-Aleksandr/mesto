@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <title>Mesto</title>
+</head>
+<body class="root">
+    
+    <header class="header">
+        <img class="logo" src="./images/logo.svg" alt="Логотип">
+    </header>
+    
+    <main class="main">
+
+        <section class="profile">
+            <img class="profile__avatar-image" src="./images/profile-avatar.png" alt="Аватар">
+           
+            <div class="profile__info">
+                <div class="profile__first-name">
+                    <h1 class="profile__info-title">Жак-Ив Кусто</h1>
+                    <button class="profile__info-button-edit"></button>
+                </div>
+                <p class="profile__info-subtitle">Исследователь океана</p>
+            </div>
+
+            <button class="profile__add-button"></button>
+        </section>
+
+        <section class="photo-grid" aria-label="Посты">
+
+            <div class="photo-grid__item">
+                <img class="photo-grid__image" src="./images/photo-karachaevsk.png" alt="В пастельных тонах старое здание в горной местности, на переднем плане кусты, а сзади на подъеме горы деревья">
+                <p class="photo-grid__capture">Карачаевск</p>
+                <button class="photo-grid__like-button"></button>
+            </div>
+
+            <div class="photo-grid__item">
+                <img class="photo-grid__image" src="./images/photo-elbrus.png" alt="В пастельных тонах старое здание в горной местности, на переднем плане кусты, а сзади на подъеме горы деревья">
+                <p class="photo-grid__capture">Гора Эльбрус</p>
+                <button class="photo-grid__like-button"></button>
+            </div>
+
+            <div class="photo-grid__item">
+                <img class="photo-grid__image" src="./images/photo-dombai.png" alt="В пастельных тонах старое здание в горной местности, на переднем плане кусты, а сзади на подъеме горы деревья">
+                <p class="photo-grid__capture">Домбай</p>
+                <button class="photo-grid__like-button"></button>
+            </div>
+
+            <div class="photo-grid__item">
+                <img class="photo-grid__image" src="./images/photo-elbrus.png" alt="В пастельных тонах старое здание в горной местности, на переднем плане кусты, а сзади на подъеме горы деревья">
+                <p class="photo-grid__capture">Гора Эльбрус</p>
+                <button class="photo-grid__like-button"></button>
+            </div>
+
+            <div class="photo-grid__item">
+                <img class="photo-grid__image" src="./images/photo-dombai.png" alt="В пастельных тонах старое здание в горной местности, на переднем плане кусты, а сзади на подъеме горы деревья">
+                <p class="photo-grid__capture">Домбай</p>
+                <button class="photo-grid__like-button"></button>
+            </div>
+
+            <div class="photo-grid__item">
+                <img class="photo-grid__image" src="./images/photo-karachaevsk.png" alt="В пастельных тонах старое здание в горной местности, на переднем плане кусты, а сзади на подъеме горы деревья">
+                <p class="photo-grid__capture">Карачаево Черкесия</p>
+                <button class="photo-grid__like-button"></button>
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p class="footer__copyright"> &copy; 2020 Mesto Russia</p>
+    </footer>
+
+    <section class="popup">
+            <form class="popup__items">
+                <button class="popup__close-button"></button>
+                <h2 class="popup__name">Редактировать профиль</h2>
+                <input class="popup__input popup__input_title_name">
+                <input class="popup__input popup__input_subtitle_name">
+                <button class="popup__save-button">Сохранить</button>
+            </form>
+    </section>
+
+    <script src="./scripts/index.js"></script>
+</body>
+</html>

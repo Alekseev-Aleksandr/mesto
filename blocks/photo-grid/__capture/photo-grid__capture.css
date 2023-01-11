@@ -1,0 +1,13 @@
+.photo-grid__capture {
+    grid-area: capture;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    width: 189px;
+    align-self: center;
+    grid-area: capt;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-left: 21px;
+}

@@ -1,0 +1,21 @@
+.photo-grid__like-button {
+    border: none;
+    background-color: white;
+    padding: 0;
+    margin-right: 20px;
+    align-self: center;
+    justify-self: end;
+    grid-area: button;
+    width: 22px;
+    height: 19px;
+    background-image: url(../../../images/photo-grid-like-button.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+
+.photo-grid__like-button:hover {
+    opacity: .6;
+    transition: .4s;
+}
