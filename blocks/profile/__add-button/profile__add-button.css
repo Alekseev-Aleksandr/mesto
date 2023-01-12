@@ -19,5 +19,6 @@
     .profile__add-button {
         justify-self: center;
         width: 282px;
+        background-size: 16px 16px;
     }    
 }

@@ -16,4 +16,4 @@
 * Flex
 * JS
 
-[GitHub Pages](https://alekseev-aleksandr.github.io/my-pet-Rus-travel/)
+[GitHub Pages](https://alekseev-aleksandr.github.io/mesto/)
