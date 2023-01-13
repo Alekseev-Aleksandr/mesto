@@ -1,9 +1,8 @@
 .profile__info-button-edit {
+    box-sizing: border-box;
     background-color: #000;
+    padding: 12px;
     border: 0;
-    width: 24px;
-    height: 24px;
-    margin-left: 18px;
     background-image: url(../../../images/profile-edit-button.svg);
     background-position: center center;
     background-repeat: no-repeat;
@@ -15,11 +14,8 @@
     transition: .4s;
 }
 
-
 @media screen and (max-width:767px) {  
     .profile__info-button-edit {
-        width: 19px;
-        height: 19px;
-        margin-left: 15px;
+        padding: 9.5px;
     }
 }

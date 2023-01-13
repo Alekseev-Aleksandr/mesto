@@ -1,8 +1,9 @@
-.photo-grid__item {
+.card {
+    padding: 0;
     margin: 0;
     background-color: white;
-    width: 282px;
-    height: 361px;
+    max-width: 282px;
+    min-height: 361px;
     border-radius: 10px;
     display: grid;
     grid-template-areas:

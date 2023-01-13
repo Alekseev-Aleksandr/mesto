@@ -2,27 +2,27 @@ let profile = document.querySelector('.profile')
 let popup = document.querySelector('.popup')
 
 let infoTitle = profile.querySelector('.profile__info-title')
-let infoSubtitle = profile.querySelector('.profile__info-subtitle')  
-
+let infoSubtitle = profile.querySelector('.profile__info-subtitle')
 let profileInfoButtonEdit = profile.querySelector('.profile__info-button-edit')
-let popupCloseButton = popup.querySelector('.popup__close-button')
+
 // let popupSaveButton = popup.querySelector('.popup__save-button')
 
-let popupInputTitle = popup.querySelector('.popup__input_title_name')
-let popupInputSubtitle = popup.querySelector('.popup__input_subtitle_name')
+let form = popup.querySelector('.popup__items')
+let popupCloseButton = popup.querySelector('.popup__close-button')
+let popupInputTitle = form.querySelector('.popup__input_type_firstname')
+let popupInputSubtitle = form.querySelector('.popup__input_type_profession')
 
-popupInputTitle.value = infoTitle.textContent
-popupInputSubtitle.value = infoSubtitle.textContent
-
-const close = function() {
+const close = function () {
     popup.classList.remove('popup_opened');
 }
 
-const open = function() {
+const open = function () {
+    popupInputTitle.value = infoTitle.textContent
+    popupInputSubtitle.value = infoSubtitle.textContent
     popup.classList.add('popup_opened');
 }
 
-const save = function(evt) {
+const save = function (evt) {
     evt.preventDefault()
     infoTitle.textContent = popupInputTitle.value
     infoSubtitle.textContent = popupInputSubtitle.value
@@ -31,4 +31,4 @@ const save = function(evt) {
 
 popupCloseButton.addEventListener('click', close)
 profileInfoButtonEdit.addEventListener('click', open)
-popup.addEventListener('submit', save)
+form.addEventListener('submit', save)

@@ -1,0 +1,6 @@
+.card__image {
+    grid-area: image;
+    min-height: 282px;
+    display: block;
+    object-fit: cover;
+}

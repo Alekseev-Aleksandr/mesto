@@ -1,4 +1,4 @@
-.photo-grid__like-button {
+.card__like-button {
     border: none;
     background-color: white;
     padding: 0;
@@ -15,7 +15,7 @@
 }
 
 
-.photo-grid__like-button:hover {
-    opacity: .6;
+.card__like-button:hover {
+    opacity: .5;
     transition: .4s;
 }

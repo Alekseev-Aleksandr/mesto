@@ -1,4 +1,7 @@
 .popup {
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 22px;
     position: fixed;
     top: 0;
     left: 0;
@@ -9,12 +12,4 @@
     height: 100%;
     background-color: rgba(0, 0, 0, .5);
     display: none;
-}
-
-@media screen and (max-width:767px) {
-    .popup {
-        font-weight: 900;
-        font-size: 18px;
-        line-height: 22px;
-    }
 }

@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../my-pet-Rus-travel"
+		},
+		{
+			"path": "../../first"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "mesto"
+	}
+}
