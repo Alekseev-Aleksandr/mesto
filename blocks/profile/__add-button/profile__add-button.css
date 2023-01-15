@@ -1,4 +1,5 @@
 .profile__add-button {
+    cursor: pointer;
     justify-self: end;
     align-self: center;
     background-color: #000;

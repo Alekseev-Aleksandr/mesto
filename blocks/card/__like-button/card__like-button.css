@@ -1,4 +1,5 @@
 .card__like-button {
+    cursor: pointer;
     border: none;
     background-color: white;
     padding: 0;
