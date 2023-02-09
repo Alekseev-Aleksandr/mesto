@@ -1,10 +1,5 @@
 .popup_opened {
-    display: flex;  
     visibility: visible;
-    opacity: 1; 
-}
-
-.popup_opened:hover {
-    visibility: visible;
+    display: flex;
     opacity: 1;
 }

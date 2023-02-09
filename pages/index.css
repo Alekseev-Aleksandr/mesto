@@ -45,16 +45,3 @@
 @import url(../blocks/popup/__name/popup__name.css);
 @import url(../blocks/popup/__save-button/popup__save-button.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
-
-.card-image-wrapper {
-    
-}
-
-.full-image {
-   
-}
-
-.full-image__capture {
-    
-}
-
