@@ -67,6 +67,7 @@ const open = function (popupName) {
 
 const save = function (evt, popupName) {
     evt = evt || window.event;
+
     if (popupName === 'edit-profile') {
 
         evt.preventDefault()
@@ -80,15 +81,11 @@ const save = function (evt, popupName) {
         const nameCard = popupAddCard.querySelector('.popup__input_type_firstname').value;
         const linkCard = popupAddCard.querySelector('.popup__input_type_profession').value;
 
-        initialCards.push({
-            name: nameCard,
-            link: linkCard
-        })
-        console.log(initialCards);
+        initialCards.push({ name: nameCard, link: linkCard })
+
         renderCard(nameCard, linkCard)
         close('add-button')
     }
-
 }
 
 popup.querySelector('.popup__close-button').addEventListener('click', () => close('edit-profile'))
@@ -136,4 +133,3 @@ popupAddCard.querySelector('.add-card-form').addEventListener('submit', () => sa
 
 const popupCardImage = document.querySelector('.show-card-image')
 popupCardImage.querySelector('.popup__close-button').addEventListener('click', () => close('fullImage'))
-//----- пункт 7 плавное открытие закрытие 
