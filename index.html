@@ -33,47 +33,6 @@
 
         <section class="photo-grid" aria-label="Посты">
 
-            <div class="card">
-                <img class="card__image" src="./images/photo-karachaevsk.png"
-                    alt="В пастельных тонах старое здание в горной местности, на переднем плане кусты, а сзади на подъеме горы деревья">
-                <h2 class="card__capture">Карачаевск</h2>
-                <button class="card__like-button" type="button"></button>
-            </div>
-
-            <div class="card">
-                <img class="card__image" src="./images/photo-elbrus.png"
-                    alt="В пастельных тонах старое здание в горной местности, на переднем плане кусты, а сзади на подъеме горы деревья">
-                <h2 class="card__capture">Гора Эльбрус</h2>
-                <button class="card__like-button" type="button"></button>
-            </div>
-
-            <div class="card">
-                <img class="card__image" src="./images/photo-dombai.png"
-                    alt="В пастельных тонах старое здание в горной местности, на переднем плане кусты, а сзади на подъеме горы деревья">
-                <h2 class="card__capture">Домбай</h2>
-                <button class="card__like-button" type="button"></button>
-            </div>
-
-            <div class="card">
-                <img class="card__image" src="./images/photo-elbrus.png"
-                    alt="В пастельных тонах старое здание в горной местности, на переднем плане кусты, а сзади на подъеме горы деревья">
-                <h2 class="card__capture">Гора Эльбрус</h2>
-                <button class="card__like-button" type="button"></button>
-            </div>
-
-            <div class="card">
-                <img class="card__image" src="./images/photo-dombai.png"
-                    alt="В пастельных тонах старое здание в горной местности, на переднем плане кусты, а сзади на подъеме горы деревья">
-                <h2 class="card__capture">Домбай</h2>
-                <button class="card__like-button" type="button"></button>
-            </div>
-
-            <div class="card">
-                <img class="card__image" src="./images/photo-karachaevsk.png"
-                    alt="В пастельных тонах старое здание в горной местности, на переднем плане кусты, а сзади на подъеме горы деревья">
-                <h2 class="card__capture">Карачаево Черкесия</h2>
-                <button class="card__like-button" type="button"></button>
-            </div>
         </section>
 
     </main>
@@ -82,20 +41,55 @@
         <p class="footer__copyright"> &copy; 2020 Mesto Russia</p>
     </footer>
 
-    <section class="popup">
-        
+    <section class="popup edit-profile">
+
         <div class="popup__wrapper">
             <button class="popup__close-button" type="button"></button>
             <h2 class="popup__name">Редактировать профиль</h2>
 
-            <form class="popup__items" name="info">
+            <form class="popup__items edit-profile-form" name="info">
                 <input class="popup__input popup__input_type_firstname" name="firstname">
                 <input class="popup__input popup__input_type_profession" name="profession">
                 <button class="popup__save-button" type="submit">Сохранить</button>
             </form>
         </div>
+    </section>
+
+    <section class="popup add-card">
+
+        <div class="popup__wrapper">
+            <button class="popup__close-button" type="button"></button>
+            <h2 class="popup__name">Новое место</h2>
+
+            <form class="popup__items add-card-form" name="info">
+                <input class="popup__input popup__input_type_firstname" name="nameImage">
+                <input class="popup__input popup__input_type_profession" name="linkImage">
+                <button class="popup__save-button" type="submit">Сохранить</button>
+            </form>
+        </div>
 
     </section>
+
+    <section class="popup show-card-image">
+
+        <div class="popup__wrapper popup__card-image-wrapper">
+            <button class="popup__close-button" type="button"></button>
+            <img class="popup__full-image" src="" alt="">
+            <p class="popup__full-image-capture"><p>
+        </div>
+
+    </section>
+
+    <template class="template-card">
+
+        <div class="card">
+            <img class="card__image">
+            <h2 class="card__capture"></h2>
+            <button class="card__like-button " type="button"></button>
+            <button class="card__trash-button" type="button"></button>
+        </div>
+
+    </template>
 
     <script src="./scripts/index.js"></script>
 </body>
