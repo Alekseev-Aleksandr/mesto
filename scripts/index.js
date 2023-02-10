@@ -26,110 +26,115 @@ const initialCards = [
 ];
 
 const profile = document.querySelector('.profile')
-const popup = document.querySelector('.popup')
+const photoGrid = document.querySelector('.photo-grid');
 
+const templateCard = document.querySelector('.template-card').content;
+ // разметки попапов 
+const popupProfile = document.querySelector('.popup-edit-profile') 
+const popupCardImage = document.querySelector('.popup-show-card-image')
+const popupAddCard = document.querySelector('.popup-add-card')
+// text value name/proffession
 const infoTitle = profile.querySelector('.profile__info-title')
 const infoSubtitle = profile.querySelector('.profile__info-subtitle')
-const profileInfoButtonEdit = profile.querySelector('.profile__info-button-edit')
+// кнопки
+const profileInfoButtonEdit = profile.querySelector('.profile__info-button-edit') 
+const closeButtonPopupProfile = popupProfile.querySelector('.popup__close-button')
+const closeButtonPopupCardImage = popupCardImage.querySelector('.popup__close-button')
+const closeButtonPopupAddCard = popupAddCard.querySelector('.popup__close-button')
+//form
+const formPopupProfile = popupProfile.querySelector('.edit-profile-form')
+const formPopupAddCard = popupAddCard.querySelector('.add-card-form')
+// inputs
+const inputTitlePopupProfile = formPopupProfile.querySelector('.popup__input_type_firstname')
+const inputSubtitlePopupProfile = formPopupProfile.querySelector('.popup__input_type_profession')
+const inputTitlePopupAddCard = formPopupAddCard.querySelector('.popup__input_type_firstname');
+const inputSubtitlePopupAddCard = formPopupAddCard.querySelector('.popup__input_type_profession');
+//template card
+// from full image 
+const popupFullImage = popupCardImage.querySelector('.popup__full-image')
+const popupFullImageCapture = popupCardImage.querySelector('.popup__full-image-capture')
 
-const form = popup.querySelector('.edit-profile-form')
-const popupCloseButton = popup.querySelector('.popup__close-button')
-const popupInputTitle = form.querySelector('.popup__input_type_firstname')
-const popupInputSubtitle = form.querySelector('.popup__input_type_profession')
-
-const close = function (popupName) {
-    if (popupName === 'edit-profile') {
-        popup.classList.remove('popup_opened');
-    }
-    else if (popupName === 'add-button') {
-        popupAddCard.classList.remove('popup_opened');
-    }
-    else if (popupName === 'fullImage') {
-        popupCardImage.classList.remove('popup_opened');
-    }
+const openPopup = function (popup) {
+    popup.classList.add('popup_opened');
 }
 
-const open = function (popupName) {
-    if (popupName === 'edit-profile') {
-        popupInputTitle.value = infoTitle.textContent
-        popupInputSubtitle.value = infoSubtitle.textContent
-        popup.classList.add('popup_opened');
-    }
-    else if (popupName === 'add-button') {
-        popupAddCard.querySelector('.popup__input_type_firstname').value = 'Название'
-        popupAddCard.querySelector('.popup__input_type_profession').value = 'Ссылка на картинку'
-        popupAddCard.classList.add('popup_opened');
-    }
-    else if (popupName === 'fullImage') {
-        popupCardImage.classList.add('popup_opened');        
-    }
+const closePopup = function (popup) {
+    popup.classList.remove('popup_opened')
 }
 
-const save = function (evt, popupName) {
-    evt = evt || window.event;
-
-    if (popupName === 'edit-profile') {
-
-        evt.preventDefault()
-        infoTitle.textContent = popupInputTitle.value
-        infoSubtitle.textContent = popupInputSubtitle.value
-        close('edit-profile')
-    }
-    else if (popupName === 'add-button') {
-
-        evt.preventDefault()
-        const nameCard = popupAddCard.querySelector('.popup__input_type_firstname').value;
-        const linkCard = popupAddCard.querySelector('.popup__input_type_profession').value;
-
-        initialCards.push({ name: nameCard, link: linkCard })
-
-        renderCard(nameCard, linkCard)
-        close('add-button')
-    }
+const saveProfileInfo = function (evt) {
+    evt.preventDefault()
+    infoTitle.textContent = inputTitlePopupProfile.value
+    infoSubtitle.textContent = inputSubtitlePopupProfile.value
+    closePopup(popupProfile)
 }
 
-popup.querySelector('.popup__close-button').addEventListener('click', () => close('edit-profile'))
-profile.querySelector('.profile__info-button-edit').addEventListener('click', () => open('edit-profile'))
-form.addEventListener('submit', () => save('', 'edit-profile'))
+const addNewCard = function (evt) {
+    evt.preventDefault()
+    const nameCard = inputTitlePopupAddCard.value;
+    const linkCard = inputSubtitlePopupAddCard.value;
 
-//----- отрисовка по массиву из 6 карт при загрузке 
-function renderCards(arr) {
-
-    arr.forEach(item => {
-        renderCard(item.name, item.link)
-    })
+    renderCard(createCard(nameCard, linkCard))
+    evt.target.reset()
+    // closePopup(popupAddCard)
 }
 
-function renderCard(cardName, cardLink) {//рендер одной карточки 
-
-    const photoGrid = document.querySelector('.photo-grid');
-    const templateCard = document.querySelector('.template-card').content;
+const createCard = function (cardName, cardLink) {
     const newCard = templateCard.querySelector('.card').cloneNode(true);
-
+    // наполяем карточку 
+    newCard.querySelector('.card__capture').textContent = cardName
     newCard.querySelector('.card__image').src = cardLink
     newCard.querySelector('.card__image').alt = 'Фото пользователя'
-    
-    newCard.querySelector('.card__image').addEventListener('click', (evt) => {
-        open('fullImage')
-        popupCardImage.querySelector('.popup__full-image').src = evt.target.src;// получаем картинку в большое изображение
-        popupCardImage.querySelector('.popup__full-image-capture').textContent = evt.target.nextElementSibling.textContent// получаем подпись картинки 
 
+    newCard.querySelector('.card__trash-button').addEventListener('click', () => {
+        newCard.querySelector('.card__trash-button').closest('.card').remove()
+    }) // delete card
+
+    newCard.querySelector('.card__like-button').addEventListener('click', () => {
+        newCard.querySelector('.card__like-button').classList.toggle('card__like-button_active')
+    }) // active like
+
+    // добавляем возможность  получить большую картинку по клику
+    newCard.querySelector('.card__image').addEventListener('click', (evt) => {
+        openPopup(popupCardImage)
+        popupFullImage.src = evt.target.src;// получаем картинку в большое изображение
+        popupFullImage.alt = evt.target.closest('.card').querySelector('.card__capture').textContent
+        popupFullImageCapture.textContent = evt.target.closest('.card').querySelector('.card__capture').textContent// получаем подпись картинки
     })
 
-    newCard.querySelector('.card__capture').textContent = cardName
-    newCard.querySelector('.card__trash-button').addEventListener('click', () => {newCard.querySelector('.card__trash-button').parentElement.remove()})// delete card
-    newCard.querySelector('.card__like-button').addEventListener('click', () => {newCard.querySelector('.card__like-button').classList.toggle('card__like-button_active')})// active like
-
-    photoGrid.prepend(newCard);
+    return newCard
+}
+//----- отрисовка по массиву из 6 карт при загрузке 
+function renderCards(arr) {
+    arr.forEach(item => {
+        renderCard(createCard(item.name, item.link))
+    })
 }
 
+function renderCard(card) {
+    photoGrid.prepend(card)
+}
+
+// open popup
+profile.querySelector('.profile__info-button-edit').addEventListener('click', (evt) => {
+    inputTitlePopupProfile.value = infoTitle.textContent
+    inputSubtitlePopupProfile.value = infoSubtitle.textContent
+    openPopup(popupProfile)
+})
+
+profile.querySelector('.profile__add-button').addEventListener('click', (evt) => {
+    inputTitlePopupAddCard.value = 'Название'
+    inputSubtitlePopupAddCard.value = 'Ссылка на картинку'
+    openPopup(popupAddCard)
+})
+
+// close popupp
+popupProfile.querySelector('.popup__close-button').addEventListener('click', (evt) => closePopup(evt.target.closest('.popup-edit-profile')))
+closeButtonPopupCardImage.addEventListener('click', (evt) => closePopup(evt.target.closest('.popup-show-card-image')))
+closeButtonPopupAddCard.addEventListener('click', (evt) => closePopup(evt.target.closest('.popup-add-card')))
+
+// save popup
+formPopupProfile.addEventListener('submit', saveProfileInfo)
+formPopupAddCard.addEventListener('submit', addNewCard);
+
 renderCards(initialCards)
-
-const popupAddCard = document.querySelector('.add-card')
-
-popupAddCard.querySelector('.popup__close-button').addEventListener('click', () => close('add-button'))
-profile.querySelector('.profile__add-button').addEventListener('click', () => open('add-button'))
-popupAddCard.querySelector('.add-card-form').addEventListener('submit', () => save('', 'add-button'));
-
-const popupCardImage = document.querySelector('.show-card-image')
-popupCardImage.querySelector('.popup__close-button').addEventListener('click', () => close('fullImage'))
