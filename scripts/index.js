@@ -123,8 +123,8 @@ profile.querySelector('.profile__info-button-edit').addEventListener('click', (e
 })
 
 profile.querySelector('.profile__add-button').addEventListener('click', (evt) => {
-    inputTitlePopupAddCard.value = 'Название'
-    inputSubtitlePopupAddCard.value = 'Ссылка на картинку'
+    inputTitlePopupAddCard.placeholder = 'Название'
+    inputSubtitlePopupAddCard.placeholder = 'Ссылка на картинку'
     openPopup(popupAddCard)
 })
 
