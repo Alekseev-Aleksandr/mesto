@@ -1,0 +1,10 @@
+.popup__save-button_active {
+    color: #fff;
+    background-color: #000;
+    opacity: 1;
+}
+
+.popup__save-button_active:hover {
+    opacity: .4;
+    transition: .4s;
+}

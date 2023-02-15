@@ -29,15 +29,15 @@ const profile = document.querySelector('.profile')
 const photoGrid = document.querySelector('.photo-grid');
 
 const templateCard = document.querySelector('.template-card').content;
- // разметки попапов 
-const popupProfile = document.querySelector('.popup-edit-profile') 
+// разметки попапов 
+const popupProfile = document.querySelector('.popup-edit-profile')
 const popupCardImage = document.querySelector('.popup-show-card-image')
 const popupAddCard = document.querySelector('.popup-add-card')
 // text value name/proffession
 const infoTitle = profile.querySelector('.profile__info-title')
 const infoSubtitle = profile.querySelector('.profile__info-subtitle')
 // кнопки
-const profileInfoButtonEdit = profile.querySelector('.profile__info-button-edit') 
+const profileInfoButtonEdit = profile.querySelector('.profile__info-button-edit')
 const closeButtonPopupProfile = popupProfile.querySelector('.popup__close-button')
 const closeButtonPopupCardImage = popupCardImage.querySelector('.popup__close-button')
 const closeButtonPopupAddCard = popupAddCard.querySelector('.popup__close-button')
@@ -56,10 +56,13 @@ const popupFullImageCapture = popupCardImage.querySelector('.popup__full-image-c
 
 const openPopup = function (popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('click', closePopupForClickOverlay)
+    document.addEventListener('keydown', closePopupForPressEsc)
 }
 
 const closePopup = function (popup) {
     popup.classList.remove('popup_opened')
+    document.removeEventListener('keydown', closePopupForPressEsc)
 }
 
 const saveProfileInfo = function (evt) {
@@ -76,6 +79,7 @@ const addNewCard = function (evt) {
 
     renderCard(createCard(nameCard, linkCard))
     evt.target.reset()
+    evt.submitter.classList.remove('popup__save-button_active');
     // closePopup(popupAddCard)
 }
 
@@ -113,6 +117,18 @@ function renderCards(arr) {
 
 function renderCard(card) {
     photoGrid.prepend(card)
+}
+// closed popup press esc and click on overlay
+const closePopupForClickOverlay = (evt) => {
+    if(evt.target.classList.contains('popup_opened')) 
+    closePopup(evt.target);
+}
+
+const closePopupForPressEsc = (evt) => {
+    const popup = document.querySelector('.popup_opened')
+    if(evt.key === 'Escape'&& popup.classList.contains('popup_opened')){
+     closePopup(popup);
+    }
 }
 
 // open popup

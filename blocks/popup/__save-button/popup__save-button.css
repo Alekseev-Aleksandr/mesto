@@ -7,13 +7,10 @@
     height: 50px;
     margin: 48px auto 37px auto;
     border: 0;
-    color: #fff;
-    background-color: #000;
-}
-
-.popup__save-button:hover {
-    opacity: .8;
-    transition: .4s;
+    color: #000;
+    background-color: #fff;
+    border: solid 1px #000;
+    opacity: .2;
 }
 
 @media screen and (max-width:767px) {
