@@ -48,16 +48,7 @@ const inputSubtitlePopupAddCard = formPopupAddCard.querySelector('.popup__input_
 const popupFullImage = popupCardImage.querySelector('.popup__full-image')
 const popupFullImageCapture = popupCardImage.querySelector('.popup__full-image-capture')
 
-const setDisabledBtn = (popup) => {
-    const inputPopupFirstname = (popup.querySelector('.popup__input_type_firstname'))
-    const inputPopupProfession = (popup.querySelector('.popup__input_type_profession'))
-    if (inputPopupFirstname.value === "" || inputPopupProfession.value === "") {
-        popup.querySelector('.popup__save-button').setAttribute('disabled', '')
-    }
-}
-
 const openPopup = function (popup) {
-    setDisabledBtn(popup)
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closePopupForPressEsc)
 }
@@ -138,17 +129,6 @@ const closePopupForPressEsc = (evt) => {
     }
 }
 
-// open popup
-profile.querySelector('.profile__info-button-edit').addEventListener('click', (evt) => {
-    inputTitlePopupProfile.value = infoTitle.textContent
-    inputSubtitlePopupProfile.value = infoSubtitle.textContent
-    openPopup(popupProfile)
-})
-
-profile.querySelector('.profile__add-button').addEventListener('click', (evt) => {
-    openPopup(popupAddCard)
-})
-
 const setListenersClose = () => {
     const popupsArr = document.querySelectorAll('.popup')
     popupsArr.forEach(popup => {
@@ -161,6 +141,26 @@ const setListenersClose = () => {
         })
     })
 }
+
+const setDisabledBtn = (popup) => {
+    const inputPopupFirstname = (popup.querySelector('.popup__input_type_firstname'))
+    const inputPopupProfession = (popup.querySelector('.popup__input_type_profession'))
+    if (inputPopupFirstname.value === "" || inputPopupProfession.value === "") {
+        popup.querySelector('.popup__save-button').setAttribute('disabled', '')
+    }
+}
+
+// open popup
+profile.querySelector('.profile__info-button-edit').addEventListener('click', (evt) => {
+    inputTitlePopupProfile.value = infoTitle.textContent
+    inputSubtitlePopupProfile.value = infoSubtitle.textContent
+    openPopup(popupProfile)
+})
+
+profile.querySelector('.profile__add-button').addEventListener('click', (evt) => {
+    setDisabledBtn(popupAddCard)
+    openPopup(popupAddCard)
+})
 
 // save popup
 formPopupProfile.addEventListener('submit', saveProfileInfo)
