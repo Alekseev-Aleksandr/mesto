@@ -7,38 +7,38 @@ const config = {
     activeErrorBorderClass : 'popup__input_type_error', 
 }   
 
-const showInputError = (formElement, inputElement, errorMessage) => {  //показать оишибку  получаем инпут проверенный на валидацию
+const showInputError = (formElement, inputElement, errorMessage, settings) => {  //показать оишибку  получаем инпут проверенный на валидацию
     const formError = formElement.querySelector(`.${inputElement.id}-error`)
 
-    formError.textContent = inputElement.validationMessage
-    formError.classList.add(config.activeErrorTextClass)
-    inputElement.classList.add(config.activeErrorBorderClass)
+    formError.textContent = errorMessage
+    formError.classList.add(settings.activeErrorTextClass)
+    inputElement.classList.add(settings.activeErrorBorderClass)
 }
 
-const hideInputError = (formElement, inputElement) => { //удалить ошибку
+const hideInputError = (formElement, inputElement, settings) => { //удалить ошибку
     const formError = formElement.querySelector(`.${inputElement.id}-error`)
-    formError.classList.remove(config.activeErrorTextClass)
-    inputElement.classList.remove(config.activeErrorBorderClass)
+    formError.classList.remove(settings.activeErrorTextClass)
+    inputElement.classList.remove(settings.activeErrorBorderClass)
     formError.textContent = ''
 }
 
-const isValid = (formElement, inputElement) => {    //проверка на валидность получает инпут и форму 
+const isValid = (formElement, inputElement, settings) => {    //проверка на валидность получает инпут и форму 
 
     if (inputElement.validity.valid) {
-        hideInputError(formElement, inputElement)
+        hideInputError(formElement, inputElement, settings)
     }
     else {
-        showInputError(formElement, inputElement, inputElement.validationMessage)
+        showInputError(formElement, inputElement, inputElement.validationMessage, settings)
     }
 }
 
-const setListeners = (formElement) => { //установка обработчиков каждому инпуту
-    const inputArr = Array.from(formElement.querySelectorAll(config.inputSelector))
+const setListeners = (formElement, settings) => { //установка обработчиков каждому инпуту
+    const inputArr = Array.from(formElement.querySelectorAll(settings.inputSelector))
 
     inputArr.forEach((el) => {
         el.addEventListener('input', () => {
-            isValid(formElement, el)
-            toggleButtonState(inputArr, formElement.querySelector(config.submitBtnSelecor))
+            isValid(formElement, el, settings)
+            toggleButtonState(inputArr, formElement.querySelector(settings.submitBtnSelecor), settings)
         })
     })
 }
@@ -49,20 +49,20 @@ const hasValidInputs = (inputArr) => {
     })
 }
 
-const toggleButtonState = (inputArr, btn) => { //оплучает массив инпутов и кнопку
+const toggleButtonState = (inputArr, btn, settings) => { //оплучает массив инпутов и кнопку
     if (hasValidInputs(inputArr)) { //если есть хоть 1 невалидный инпут
-        btn.classList.remove(config.activeBtnSubmitClass)
+        btn.classList.remove(settings.activeBtnSubmitClass)
         btn.setAttribute('disabled','')
     } else {
-        btn.classList.add(config.activeBtnSubmitClass)
+        btn.classList.add(settings.activeBtnSubmitClass)
         btn.removeAttribute('disabled','')
     }
 }
 
-const enableValidation = (config) => {
-    const formsArr = Array.from(document.querySelectorAll(config.formSelector))
+const enableValidation = (settings) => {
+    const formsArr = Array.from(document.querySelectorAll(settings.formSelector))
     formsArr.forEach((formElement) => {
-        setListeners(formElement)
+        setListeners(formElement, settings)
     })
 }
 
