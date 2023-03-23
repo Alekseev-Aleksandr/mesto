@@ -1,3 +1,15 @@
+import { Card } from './Card.js';
+import { FormValidator } from './Formvalidator.js';
+
+const config = {
+    formSelector: '.popup__items',
+    inputSelector: '.popup__input',
+    submitBtnSelecor: '.popup__save-button',
+    activeBtnSubmitClass: 'popup__save-button_active',
+    activeErrorTextClass: 'popup__inputs-error_active',
+    activeErrorBorderClass: 'popup__input_type_error',
+}
+
 const initialCards = [
     {
         name: 'Архыз',
@@ -45,8 +57,6 @@ const inputSubtitlePopupProfile = formPopupProfile.querySelector('.popup__input_
 const inputTitlePopupAddCard = formPopupAddCard.querySelector('.popup__input_type_firstname');
 const inputSubtitlePopupAddCard = formPopupAddCard.querySelector('.popup__input_type_profession');
 // from full image 
-const popupFullImage = popupCardImage.querySelector('.popup__full-image')
-const popupFullImageCapture = popupCardImage.querySelector('.popup__full-image-capture')
 
 const openPopup = function (popup) {
     popup.classList.add('popup_opened');
@@ -68,10 +78,10 @@ const saveProfileInfo = function (evt) {
 const addNewCard = function (evt) {
     evt.preventDefault()
 
-    const nameCard = inputTitlePopupAddCard.value;
     const linkCard = inputSubtitlePopupAddCard.value;
+    const nameCard = inputTitlePopupAddCard.value;
 
-    renderCard(createCard(nameCard, linkCard))
+    renderCard(linkCard, nameCard, '.template-card')
 
     evt.target.reset()
     evt.submitter.classList.remove('popup__save-button_active');
@@ -80,40 +90,10 @@ const addNewCard = function (evt) {
     closePopup(popupAddCard)
 }
 
-const createCard = function (cardName, cardLink) {
-    const newCard = templateCard.querySelector('.card').cloneNode(true);
-    // наполяем карточку 
-    newCard.querySelector('.card__capture').textContent = cardName
-    newCard.querySelector('.card__image').src = cardLink
-    newCard.querySelector('.card__image').alt = 'Фото пользователя'
+function renderCard(link, name, template) {
+    const newCard = new Card(link, name, '.template-card')
 
-    newCard.querySelector('.card__trash-button').addEventListener('click', () => {
-        newCard.querySelector('.card__trash-button').closest('.card').remove()
-    }) // delete card
-
-    newCard.querySelector('.card__like-button').addEventListener('click', () => {
-        newCard.querySelector('.card__like-button').classList.toggle('card__like-button_active')
-    }) // active like
-
-    // добавляем возможность  получить большую картинку по клику
-    newCard.querySelector('.card__image').addEventListener('click', (evt) => {
-        openPopup(popupCardImage)
-        popupFullImage.src = evt.target.src;// получаем картинку в большое изображение
-        popupFullImage.alt = evt.target.closest('.card').querySelector('.card__capture').textContent
-        popupFullImageCapture.textContent = evt.target.closest('.card').querySelector('.card__capture').textContent// получаем подпись картинки
-    })
-
-    return newCard
-}
-//----- отрисовка по массиву из 6 карт при загрузке 
-function renderCards(arr) {
-    arr.forEach(item => {
-        renderCard(createCard(item.name, item.link))
-    })
-}
-
-function renderCard(card) {
-    photoGrid.prepend(card)
+    photoGrid.prepend(newCard.generateCardes())
 }
 // closed popup press esc and click on overlay
 const closePopupForClickOverlay = (evt) => {
@@ -165,6 +145,16 @@ profile.querySelector('.profile__add-button').addEventListener('click', (evt) =>
 // save popup
 formPopupProfile.addEventListener('submit', saveProfileInfo)
 formPopupAddCard.addEventListener('submit', addNewCard);
-
 setListenersClose()
-renderCards(initialCards)
+
+initialCards.forEach(newCardProp => {
+    renderCard(newCardProp.link, newCardProp.name, '.template-card')
+})
+
+const formValidProfile = new FormValidator(config, '.edit-profile-form')
+formValidProfile.enableValidation()
+
+const formValidCard = new FormValidator(config, '.add-card-form') 
+formValidCard.enableValidation()
+
+export { openPopup, popupCardImage }
