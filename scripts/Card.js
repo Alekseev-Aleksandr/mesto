@@ -1,42 +1,38 @@
-import { openPopup, popupCardImage } from "./index.js"
+import { openPopupFullImage } from "./index.js"
 
 export class Card {
 
-    constructor(linkImage, text, selector) {
-        this._linkImage = linkImage
-        this._text = text
-        this._selector = selector
+    constructor(data, templateSelector) {
+        this._linkImage = data.link
+        this._name = data.name
+        this._templateSelector = templateSelector
     }
 
     _getTemplate() { // получаем разметку шаблона карточки
         const cardElement = document
-            .querySelector(this._selector)
+            .querySelector(this._templateSelector)
             .content
             .querySelector('.card')
             .cloneNode(true)
 
         return cardElement
     }
+
     _setListenerBtnDelete() {
         this._element.querySelector('.card__trash-button').addEventListener('click', () => { //обработчик на удаление 
-            this._element.querySelector('.card__trash-button').closest('.card').remove()
+            this._element.remove()
+            this._element = null
         })
     }
-    _setListenerBtnLike() {
-        this._element.querySelector('.card__like-button').addEventListener('click', (evt) => { // обработчик лайка
-            this._element.querySelector('.card__like-button').classList.toggle('card__like-button_active')
-        })
-    }
-    _setListenerFullImage() {
-        this._popupFullImage = document.querySelector('.popup__full-image')
-        this._popupFullImageCapture = document.querySelector('.popup__full-image-capture')
 
-        this._element.querySelector('.card__image').addEventListener('click', (evt) => { // обработчик нажатия на картинку
-            openPopup(popupCardImage)
-            this._popupFullImage.src = evt.target.src;// получаем картинку в большое изображение
-            this._popupFullImage.alt = evt.target.closest('.card').querySelector('.card__capture').textContent
-            this._popupFullImageCapture.textContent = evt.target.closest('.card').querySelector('.card__capture').textContent
+    _setListenerBtnLike() {
+       this._elementLike.addEventListener('click', (evt) => { // обработчик лайка
+            this._elementLike.classList.toggle('card__like-button_active')
         })
+    }
+
+    _setListenerFullImage() {
+        this._elementImage.addEventListener('click', () => openPopupFullImage(this._linkImage, this._name)) // обработчик нажатия на картинку
     }
 
     _setListeners() { // установка всех обработчиков 
@@ -45,12 +41,14 @@ export class Card {
         this._setListenerFullImage()
     }
 
-    generateCardes() { // записать в разметку данные 
+    generateCard() { // записать в разметку данные 
         this._element = this._getTemplate()
+        this._elementImage = this._element.querySelector('.card__image')
+        this._elementLike = this._element.querySelector('.card__like-button')
 
-        this._element.querySelector('.card__capture').textContent = this._text
-        this._element.querySelector('.card__image').src = this._linkImage
-        this._element.querySelector('.card__image').alt = 'Фото пользователя'
+        this._element.querySelector('.card__capture').textContent = this._name
+        this._elementImage.src = this._linkImage
+        this._elementImage.alt = this._name
 
         this._setListeners()
 

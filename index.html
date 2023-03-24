@@ -48,24 +48,18 @@
             <h2 class="popup__name">Редактировать профиль</h2>
 
             <form class="popup__items edit-profile-form" name="info" novalidate>
-                <input class="popup__input popup__input_type_firstname" 
-                        id="popup__input-firstname"
-                        name="firstname" 
-                        required
-                        minlength="2" 
-                        maxlength="40">
+                <div class="popup__items-wrapper">
+                    <input class="popup__input popup__input_type_firstname" id="popup__input-firstname" name="firstname"
+                        required minlength="2" maxlength="40">
 
-                <span class="popup__inputs-error popup__input-firstname-error"></span>
+                    <span class="popup__inputs-error popup__input-firstname-error"></span>
+                </div>
+                <div class="popup__items-wrapper">
+                    <input class="popup__input popup__input_type_profession" id="popup__input-profession"
+                        name="profession" required minlength="2" maxlength="200">
 
-                <input class="popup__input popup__input_type_profession" 
-                        id ="popup__input-profession"
-                        name="profession" 
-                        required 
-                        minlength="2" 
-                        maxlength="200">
-                
-                <span class="popup__inputs-error popup__input-profession-error"></span>
-
+                    <span class="popup__inputs-error popup__input-profession-error"></span>
+                </div>
                 <button class="popup__save-button popup__save-button_active" type="submit">Сохранить</button>
             </form>
         </div>
@@ -78,28 +72,21 @@
             <h2 class="popup__name">Новое место</h2>
 
             <form class="popup__items add-card-form" name="info">
-                <input class="popup__input popup__input_type_firstname" 
-                        placeholder="Название"
-                        name="nameImage"
-                        id="name-image-input"
-                        required
-                        minlength="2" 
-                        maxlength="30">
+                <div class="popup__items-wrapper">
+                    <input class="popup__input popup__input_type_firstname" placeholder="Название" name="nameImage"
+                        id="name-image-input" required minlength="2" maxlength="30">
 
-                <span class="popup__inputs-error name-image-input-error"></span>
+                    <span class="popup__inputs-error name-image-input-error"></span>
+                </div>
+                <div class="popup__items-wrapper">
+                    <input class="popup__input popup__input_type_profession" placeholder="Ссылка на картинку" type="url"
+                        id="link-image-input" name="link-image" required>
 
-                <input class="popup__input popup__input_type_profession" 
-                        placeholder="Ссылка на картинку"
-                        type="url"
-                        id="link-image-input"
-                        name="link-image" 
-                        required>
-                
-                <span class="popup__inputs-error link-image-input-error"></span>
-                
+                    <span class="popup__inputs-error link-image-input-error"></span>
+                </div>
                 <button class="popup__save-button" type="submit">Сохранить</button>
 
-                
+
             </form>
         </div>
 

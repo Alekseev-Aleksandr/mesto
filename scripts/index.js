@@ -1,7 +1,7 @@
 import { Card } from './Card.js';
 import { FormValidator } from './Formvalidator.js';
 
-const config = {
+const configValidation = {
     formSelector: '.popup__items',
     inputSelector: '.popup__input',
     submitBtnSelecor: '.popup__save-button',
@@ -39,8 +39,6 @@ const initialCards = [
 
 const profile = document.querySelector('.profile')
 const photoGrid = document.querySelector('.photo-grid');
-//template card
-const templateCard = document.querySelector('.template-card').content;
 // разметки попапов 
 const popupProfile = document.querySelector('.popup-edit-profile')
 const popupCardImage = document.querySelector('.popup-show-card-image')
@@ -57,6 +55,9 @@ const inputSubtitlePopupProfile = formPopupProfile.querySelector('.popup__input_
 const inputTitlePopupAddCard = formPopupAddCard.querySelector('.popup__input_type_firstname');
 const inputSubtitlePopupAddCard = formPopupAddCard.querySelector('.popup__input_type_profession');
 // from full image 
+const popupFullImage = document.querySelector('.popup__full-image')
+const popupFullImageCapture = document.querySelector('.popup__full-image-capture')
+
 
 const openPopup = function (popup) {
     popup.classList.add('popup_opened');
@@ -78,28 +79,37 @@ const saveProfileInfo = function (evt) {
 const addNewCard = function (evt) {
     evt.preventDefault()
 
-    const linkCard = inputSubtitlePopupAddCard.value;
-    const nameCard = inputTitlePopupAddCard.value;
+    const link = inputSubtitlePopupAddCard.value;
+    const name = inputTitlePopupAddCard.value;
 
-    renderCard(linkCard, nameCard, '.template-card')
+    renderCard({ link, name }, '.template-card')
 
     evt.target.reset()
-    evt.submitter.classList.remove('popup__save-button_active');
-    evt.submitter.setAttribute('disabled', '');
+    formValidCard.disableBtn()
+    // evt.submitter.classList.remove('popup__save-button_active');
+    // evt.submitter.disabled = true;
 
     closePopup(popupAddCard)
 }
 
-function renderCard(link, name, template) {
-    const newCard = new Card(link, name, '.template-card')
+const openPopupFullImage = function (link, name) {
 
-    photoGrid.prepend(newCard.generateCardes())
+    openPopup(popupCardImage)
+
+    popupFullImage.src = link;// получаем картинку в большое изображение
+    popupFullImage.alt = name
+    popupFullImageCapture.textContent = name
+
 }
-// closed popup press esc and click on overlay
-const closePopupForClickOverlay = (evt) => {
-    if (evt.target.classList.contains('popup_opened')) {
-        closePopup(evt.target);
-    }
+
+function createCard(data, templateSelector){
+    const newCard = new Card(data, templateSelector)
+
+    return newCard
+}
+
+function renderCard(data, templateSelector) {
+    photoGrid.prepend(createCard(data, templateSelector).generateCard())
 }
 
 const closePopupForPressEsc = (evt) => {
@@ -115,8 +125,7 @@ const setListenersClose = () => {
         popup.addEventListener('mousedown', (evt) => {
             if (evt.target.classList.contains('popup_opened')) {
                 closePopup(popup)
-            }
-            if (evt.target.classList.contains('popup__close-button'))
+            } else if (evt.target.classList.contains('popup__close-button'))
                 closePopup(popup)
         })
     })
@@ -138,7 +147,7 @@ profile.querySelector('.profile__info-button-edit').addEventListener('click', (e
 })
 
 profile.querySelector('.profile__add-button').addEventListener('click', (evt) => {
-    setDisabledBtn(popupAddCard)
+    formValidProfile.disableBtn()
     openPopup(popupAddCard)
 })
 
@@ -148,13 +157,13 @@ formPopupAddCard.addEventListener('submit', addNewCard);
 setListenersClose()
 
 initialCards.forEach(newCardProp => {
-    renderCard(newCardProp.link, newCardProp.name, '.template-card')
+    renderCard(newCardProp, '.template-card')
 })
 
-const formValidProfile = new FormValidator(config, '.edit-profile-form')
+const formValidProfile = new FormValidator(configValidation, '.edit-profile-form')
 formValidProfile.enableValidation()
 
-const formValidCard = new FormValidator(config, '.add-card-form') 
+const formValidCard = new FormValidator(configValidation, '.add-card-form')
 formValidCard.enableValidation()
 
-export { openPopup, popupCardImage }
+export { openPopup, popupCardImage, renderCard, openPopupFullImage }

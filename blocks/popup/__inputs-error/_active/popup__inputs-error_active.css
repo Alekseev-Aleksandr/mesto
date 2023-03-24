@@ -1,3 +1,5 @@
 .popup__inputs-error_active {
     display: block;
+    position: absolute;
+    min-height: 32px;
 }
