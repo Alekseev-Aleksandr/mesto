@@ -130,15 +130,6 @@ const setListenersClose = () => {
         })
     })
 }
-
-const setDisabledBtn = (popup) => {
-    const inputPopupFirstname = (popup.querySelector('.popup__input_type_firstname'))
-    const inputPopupProfession = (popup.querySelector('.popup__input_type_profession'))
-    if (inputPopupFirstname.value === "" || inputPopupProfession.value === "") {
-        popup.querySelector('.popup__save-button').setAttribute('disabled', '')
-    }
-}
-
 // open popup
 profile.querySelector('.profile__info-button-edit').addEventListener('click', (evt) => {
     inputTitlePopupProfile.value = infoTitle.textContent
@@ -147,7 +138,7 @@ profile.querySelector('.profile__info-button-edit').addEventListener('click', (e
 })
 
 profile.querySelector('.profile__add-button').addEventListener('click', (evt) => {
-    formValidProfile.disableBtn()
+    formValidCard.disableBtn()
     openPopup(popupAddCard)
 })
 
