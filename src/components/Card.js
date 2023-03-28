@@ -1,11 +1,11 @@
-import { openPopupFullImage } from "./index.js"
 
 export class Card {
 
-    constructor(data, templateSelector) {
+    constructor(data, templateSelector, handleCardClick) {
         this._linkImage = data.link
         this._name = data.name
         this._templateSelector = templateSelector
+        this._handleCardClick = handleCardClick
     }
 
     _getTemplate() { // получаем разметку шаблона карточки
@@ -32,7 +32,7 @@ export class Card {
     }
 
     _setListenerFullImage() {
-        this._elementImage.addEventListener('click', () => openPopupFullImage(this._linkImage, this._name)) // обработчик нажатия на картинку
+        this._elementImage.addEventListener('click', () => {this._handleCardClick(this._linkImage, this._name)}) // обработчик нажатия на картинку
     }
 
     _setListeners() { // установка всех обработчиков 
