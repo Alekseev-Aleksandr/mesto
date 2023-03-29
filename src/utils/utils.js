@@ -5,22 +5,20 @@ import { newPopupWithImage } from '../pages/index.js';
 import { userInfo } from '../pages/index.js';
 
 export const renderer = (cardInfo) => {
-
     const newCard = new Card({ link: cardInfo.link, name: cardInfo.name }, '.template-card', handleCardClick)
 
     const dataInTemplate = newCard.generateCard()
     newSection.addItem(dataInTemplate)
 }
 
-export const handleAddNewCard = function ({ firstName: inputName, profession: inputLink }) {
-
-    renderer({ link: inputLink, name: inputName })
+export const handleAddNewCard = function (dataCard) {
+    renderer({ link: dataCard.linkImage, name: dataCard.nameImage })
     formValidCard.disableBtn()
 
 }
 
-export const handleSaveProfileInfo = function ({ firstName: firstName, profession: profession }) {
-    userInfo.setUserInfo(firstName, profession)
+export const handleSaveProfileInfo = function (dataCard) {
+    userInfo.setUserInfo(dataCard.firstname, dataCard.profession)
 }
 
 export const handleCardClick = (image, name) => {

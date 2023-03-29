@@ -9,11 +9,10 @@ export class PopupWithImage extends Popup{
     }
 
     open = (image, name) =>{
+        super.open()
+        
         this._popupFullImage.src = image
         this._popupFullImage.alt = name
         this._popupFullImageCapture.textContent = name
-        
-        this._popup.classList.add('popup_opened');
-        document.addEventListener('keydown', this._handleEscClose)
     }
 }

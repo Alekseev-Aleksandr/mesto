@@ -39,7 +39,3 @@ export const profileDom = document.querySelector('.profile')
 export const popupProfileDom = document.querySelector('.popup-edit-profile')
 
 export const formPopupProfileDom = popupProfileDom.querySelector('.edit-profile-form')
-
-export const inputTitlePopupProfileDom = formPopupProfileDom.querySelector('.popup__input_type_firstname')
-export const inputSubtitlePopupProfileDom = formPopupProfileDom.querySelector('.popup__input_type_profession')
-

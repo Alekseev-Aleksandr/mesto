@@ -18,27 +18,23 @@ export class Card {
         return cardElement
     }
 
-    _setListenerBtnDelete() {
-        this._element.querySelector('.card__trash-button').addEventListener('click', () => { //обработчик на удаление 
-            this._element.remove()
-            this._element = null
-        })
+    _deleteCard() {
+        this._element.remove()
+        this._element = null
     }
 
-    _setListenerBtnLike() {
-       this._elementLike.addEventListener('click', (evt) => { // обработчик лайка
-            this._elementLike.classList.toggle('card__like-button_active')
-        })
+    _toggleLike() {
+        this._elementLike.classList.toggle('card__like-button_active')
     }
 
-    _setListenerFullImage() {
-        this._elementImage.addEventListener('click', () => {this._handleCardClick(this._linkImage, this._name)}) // обработчик нажатия на картинку
+    _handleImageClick() {
+        this._handleCardClick(this._linkImage, this._name)
     }
 
     _setListeners() { // установка всех обработчиков 
-        this._setListenerBtnDelete()
-        this._setListenerBtnLike()
-        this._setListenerFullImage()
+        this._element.querySelector('.card__trash-button').addEventListener('click', this._deleteCard.bind(this))//обработчик на удаление 
+        this._elementLike.addEventListener('click', this._toggleLike.bind(this))
+        this._elementImage.addEventListener('click', this._handleImageClick.bind(this))
     }
 
     generateCard() { // записать в разметку данные 

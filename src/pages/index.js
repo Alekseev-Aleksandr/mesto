@@ -10,8 +10,6 @@ import { UserInfo } from '../components/UserInfo.js';
 import { initialCards, 
     configValidation,
     profileDom,
-    inputTitlePopupProfileDom,
-    inputSubtitlePopupProfileDom,
     } from '../utils/constants.js';
     
 import { renderer, handleAddNewCard, handleCardClick, handleSaveProfileInfo } from '../utils/utils.js';
@@ -26,9 +24,6 @@ export const userInfo = new UserInfo('.profile__info-title', '.profile__info-sub
 const popupWithFormAddCard = new PopupWithForm('.popup-add-card', handleAddNewCard)
 const popupWithFormProfileInfo = new PopupWithForm('.popup-edit-profile', handleSaveProfileInfo)
 
-const popupProfile = new Popup('.popup-edit-profile')
-const popupAddCard = new Popup('.popup-add-card')
-
 export const newPopupWithImage = new PopupWithImage('.popup-show-card-image')
 
 newSection.renderAllElement()
@@ -36,21 +31,17 @@ newSection.renderAllElement()
 formValidCard.enableValidation()
 formValidProfile.enableValidation()
 
-popupWithFormAddCard.setEventListeners()
 popupWithFormProfileInfo.setEventListeners()
-
-popupProfile.setEventListeners()
-popupAddCard.setEventListeners()
+popupWithFormAddCard.setEventListeners()
 
 newPopupWithImage.setEventListeners()
 
 profileDom.querySelector('.profile__info-button-edit').addEventListener('click', (evt) => {
-    inputTitlePopupProfileDom.value = userInfo.getUserInfo().userName
-    inputSubtitlePopupProfileDom.value = userInfo.getUserInfo().userInfo
-    popupProfile.open()
+    popupWithFormProfileInfo.setInputValues(userInfo.getUserInfo())
+    popupWithFormProfileInfo.open()
 })
 
 profileDom.querySelector('.profile__add-button').addEventListener('click', (evt) => {
     formValidCard.disableBtn()
-    popupAddCard.open()
+    popupWithFormAddCard.open()
 })

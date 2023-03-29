@@ -3,7 +3,6 @@ export class UserInfo {
 
     this._profileTitle = document.querySelector(selectorNameUser)
     this._profileSubtitle = document.querySelector(selectorInfoUser)
-        
     }
 
     getUserInfo(){

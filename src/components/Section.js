@@ -14,6 +14,5 @@ export class Section {
 
     addItem(domElement) { // ф-ция рендеринга одной карты 
         this._container.prepend(domElement);
-        // this._renderer(domElement)
     }
 }
