@@ -1,10 +1,10 @@
-.popup__save-button_active {
+.popup__button_active {
     color: #fff;
     background-color: #000;
     opacity: 1;
 }
 
-.popup__save-button_active:hover {
+.popup__button_active:hover {
     opacity: .4;
     transition: .4s;
 }

@@ -26,7 +26,7 @@ export class Popup {
          this.close()
             } 
         else {
-            if (evt.target.classList.contains('popup__close-button')){
+            if (evt.target.classList.contains('popup__button_type_close')){
                 this.close()
             }
         }

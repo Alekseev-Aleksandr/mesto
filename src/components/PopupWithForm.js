@@ -1,14 +1,17 @@
+import { api } from "../pages/index.js";
 import { Popup } from "./Popup.js";
 
 export class PopupWithForm extends Popup {
 
     constructor(selectorPopup, submitForm) {
         super(selectorPopup)
+        this._api = api
         this._submitForm = submitForm
         this._inputName = this._popup.querySelector('.popup__input_type_firstname');
         this._inputLink = this._popup.querySelector('.popup__input_type_profession');
         this._form = this._popup.querySelector('.popup__items')
         this._inputList = this._form.querySelectorAll('.popup__input')
+
     }
 
     _getInputValues = () => {
@@ -26,19 +29,33 @@ export class PopupWithForm extends Popup {
         this._inputLink.value = dataInputs.userInfo
     }
 
-    setEventListeners() {
+    setEventListeners(pushDataServerCallBack) {
         super.setEventListeners()
 
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault()
-            this._submitForm(this._getInputValues())
-            this.close()
+            pushDataServerCallBack(this._getInputValues())
+                .then((res) => {
+                    this._submitForm(res)
+                })
+                .then(() => {
+                    this.close()
+                })
+                .catch((res) => {
+                    console.log(res);
+                })
         })
+
+
+
+
+
     }
+
 
     close() {
         super.close()
-        
+
         this._form.reset()
     }
 }
