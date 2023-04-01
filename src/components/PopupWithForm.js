@@ -5,7 +5,7 @@ export class PopupWithForm extends Popup {
 
     constructor(selectorPopup, submitForm) {
         super(selectorPopup)
-        this._api = api
+        
         this._submitForm = submitForm
         this._inputName = this._popup.querySelector('.popup__input_type_firstname');
         this._inputLink = this._popup.querySelector('.popup__input_type_profession');
@@ -17,7 +17,7 @@ export class PopupWithForm extends Popup {
 
     _getInputValues = () => {
         this._formValues = {}
-       
+
         this._inputList.forEach(input => {
             this._formValues[input.name] = input.value
         })
@@ -35,23 +35,27 @@ export class PopupWithForm extends Popup {
 
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault()
-            pushDataServerCallBack(this._getInputValues(),this._buttonFrom)
-
+            this._buttonFrom.textContent = "Сохраняется..."
+            pushDataServerCallBack(this._getInputValues())
                 .then((res) => {
                     this._submitForm(res)
                 })
                 .then(() => {
-                    this.close()
+                    return (this.close())
                 })
                 .catch((res) => {
                     console.log(res);
                 })
+                .finally(()=>{
+                    this._buttonFrom.textContent = "Сохранить"
+                })
+
         })
     }
 
     close() {
         super.close()
-        this._buttonFrom.textContent = "Сохранить"
+
         this._form.reset()
     }
 }

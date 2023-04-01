@@ -57,10 +57,10 @@ export class Card {
     }
 
     rerenderCountLikes(callBackrenderLikes) {
-        this._elementLike.classList.toggle('card__like-button_active')
         callBackrenderLikes(this._cardId)
             .then(res => {
                 this._likeCount.textContent = res.likes.length
+                this._elementLike.classList.toggle('card__like-button_active')
             })
             .catch(err =>{ 
                 console.log(err);

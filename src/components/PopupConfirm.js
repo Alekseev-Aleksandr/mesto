@@ -1,28 +1,32 @@
-import { newSection, userId } from "../pages/index.js";
+import { userId } from "../pages/index.js";
 import { Popup } from "./Popup.js";
 
 export class PopupConfirm extends Popup {
-    constructor(selectorPopup, api) {
+    constructor(selectorPopup, apiCallback, updateSectionCallBack) {
         super(selectorPopup)
-        this._api = api
-        this._element = this._popup.querySelector('.popup__button_type_confirm')
+        this._api = apiCallback
+        this._updateSectionCallBack = updateSectionCallBack
+        this._buttonForm = this._popup.querySelector('.popup__button_type_confirm')
     }
 
     setEventListeners() {
         super.setEventListeners()
-        this._popup.querySelector('.popup__button_type_confirm').addEventListener('click', this.delereCardConfirm.bind(this))
+        this._buttonForm.addEventListener('click', this.delereCardConfirm.bind(this))
     }
 
     delereCardConfirm() {
-        this._api.deleteCard(this._cardId, this._element)
+        this._buttonForm.textContent = 'Удаляется...'
+        this._api(this._cardId)
             .then(() => {
-                newSection.updateSection(userId)
+                this._updateSectionCallBack(userId)
                     .then(() => {
                         this.close()
-                        this._element.textContent = "Да"
                     })
-                    .catch(err =>{ 
+                    .catch(err => {
                         console.log(err);
+                    })
+                    .finally(() => {
+                        this._buttonForm.textContent = 'Да'
                     })
             })
 

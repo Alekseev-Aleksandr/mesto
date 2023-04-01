@@ -25,7 +25,7 @@ export const renderer = (cardInfo, userId) => {
 }
 
 export const handleAddNewCard = function () {
-    newSection.updateSection(userId);
+    rerenderAllCardsInPage(userId)
     formValidCard.disableBtn()
 }
 
@@ -52,4 +52,15 @@ export const handleAddLikeCard = (cardId) => {
 export const handleRemoveLikeCard = (cardId) => {
     return api.removeLikeCard(cardId)
 
+}
+
+export const rerenderAllCardsInPage = (userId) => {
+    return api.getInitialCards()
+        .then(res => {
+            newSection.renderAllElement(res, userId)
+            return res
+        })
+        .catch(err => {
+            console.log(err);
+        })
 }

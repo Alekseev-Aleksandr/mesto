@@ -37,7 +37,7 @@ export class Api {
             .then((res) => res.json())
     }
 
-    editProfileInfo(data,element) {
+    editProfileInfo(data) {
 
         return fetch(`${this._baseUrl}/users/me`,
             {
@@ -48,10 +48,6 @@ export class Api {
                     about: data.profession
                 })
             })
-            .finally(()=>{
-                element.textContent = "Сохраняется..."
-            })
-
             .then((res) => {
                 res = this.chekAnswer(res)
                 return res
@@ -59,7 +55,7 @@ export class Api {
             
     }
 
-    addNewCard(data, element) {
+    addNewCard(data) {
         
         return fetch(`${this._baseUrl}/cards`,
             {
@@ -70,9 +66,6 @@ export class Api {
                     link: data.linkImage
                 })
             })
-            .finally(()=>{
-                element.textContent = "Сохраняется..."
-            })
             .then((res) => {
                 res = this.chekAnswer(res)
                 return res
@@ -81,7 +74,7 @@ export class Api {
     }
 
 
-    editAvatar(data, element) {
+    editAvatar(data) {
         return fetch(`${this._baseUrl}/users/me/avatar`,
             {
                 method: "PATCH",
@@ -90,9 +83,6 @@ export class Api {
                     avatar: data.linkImageAvatar
                 })
             })
-            .finally(()=>{
-                element.textContent = "Сохраняется..."
-            })
             .then((res) => {
                 res = this.chekAnswer(res)
                 return res
@@ -100,14 +90,11 @@ export class Api {
            
     }
 
-    deleteCard(cardId, element) {
+    deleteCard(cardId) {
         return fetch(`${this._baseUrl}/cards/${cardId}`,
             {
                 method: "DELETE",
                 headers: this._headers,
-            })
-            .finally(()=>{
-                element.textContent = "Удаляется..."
             })
             .then((res) => {
                 res = this.chekAnswer(res)

@@ -12,7 +12,7 @@ import {
     profileDom,
 } from '../utils/constants.js';
 
-import { renderer, handleAddNewCard, handleSaveProfileInfo, handleEditAvatar } from '../utils/utils.js';
+import { renderer, handleAddNewCard, handleSaveProfileInfo, handleEditAvatar, rerenderAllCardsInPage } from '../utils/utils.js';
 
 import { PopupConfirm } from '../components/PopupConfirm';
 
@@ -24,7 +24,7 @@ export const api = new Api({
     }
 })
 
-export const newSection = new Section(renderer, '.photo-grid', api)
+export const newSection = new Section(renderer, '.photo-grid')
 export const userInfo = new UserInfo('.profile__info-title', '.profile__info-subtitle', '.profile__avatar-image')
 
 export const popupWithFormProfileInfo = new PopupWithForm('.popup-edit-profile', handleSaveProfileInfo)
@@ -36,13 +36,16 @@ popupWithFormAddCard.setEventListeners(api.addNewCard.bind(api))
 popupWithFormEditAvatar.setEventListeners(api.editAvatar.bind(api))
 
 export const newPopupWithImage = new PopupWithImage('.popup-show-card-image')
-export const popupConfirmDelete = new PopupConfirm('.popup-confirm', api, newSection.updateSection)
+export const popupConfirmDelete = new PopupConfirm('.popup-confirm', api.deleteCard.bind(api), rerenderAllCardsInPage)
 popupConfirmDelete.setEventListeners()
 newPopupWithImage.setEventListeners()
 
 export const formValidCard = new FormValidator(configValidation, '.add-card-form')
 const formValidProfile = new FormValidator(configValidation, '.edit-profile-form')
 const formValidEditAvatar = new FormValidator(configValidation, '.edit-avatar')
+formValidProfile.enableValidation()
+formValidCard.enableValidation()
+formValidEditAvatar.enableValidation()
 
 //__________________________________________________________________
 export let userId = ''
@@ -66,19 +69,16 @@ Promise.all([fullUserInfo, getInitialCards])
     .catch(err => console.log(err))
 
 profileDom.querySelector('.profile__button_type_edit-info').addEventListener('click', (evt) => {
-    formValidProfile.enableValidation()
     popupWithFormProfileInfo.setInputValues(userInfo.getUserInfo())
     popupWithFormProfileInfo.open()
 })
 
 profileDom.querySelector('.profile__button_type_add-card').addEventListener('click', (evt) => {
-    formValidCard.enableValidation()
     formValidCard.disableBtn()
     popupWithFormAddCard.open()
 })
 
 profileDom.querySelector('.profile__button_type_edit-avatar').addEventListener('click', (evt) => {
-    formValidEditAvatar.enableValidation()
     formValidEditAvatar.disableBtn()
     popupWithFormEditAvatar.open()
 })
