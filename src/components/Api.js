@@ -37,7 +37,7 @@ export class Api {
             .then((res) => res.json())
     }
 
-    editProfileInfo(data) {
+    editProfileInfo(data,element) {
 
         return fetch(`${this._baseUrl}/users/me`,
             {
@@ -48,13 +48,19 @@ export class Api {
                     about: data.profession
                 })
             })
+            .finally(()=>{
+                element.textContent = "Сохраняется..."
+            })
+
             .then((res) => {
                 res = this.chekAnswer(res)
                 return res
             })
+            
     }
 
-    addNewCard(data) {
+    addNewCard(data, element) {
+        
         return fetch(`${this._baseUrl}/cards`,
             {
                 method: "POST",
@@ -64,14 +70,18 @@ export class Api {
                     link: data.linkImage
                 })
             })
+            .finally(()=>{
+                element.textContent = "Сохраняется..."
+            })
             .then((res) => {
                 res = this.chekAnswer(res)
                 return res
             })
+            
     }
 
 
-    editAvatar(data) {
+    editAvatar(data, element) {
         return fetch(`${this._baseUrl}/users/me/avatar`,
             {
                 method: "PATCH",
@@ -80,22 +90,30 @@ export class Api {
                     avatar: data.linkImageAvatar
                 })
             })
+            .finally(()=>{
+                element.textContent = "Сохраняется..."
+            })
             .then((res) => {
                 res = this.chekAnswer(res)
                 return res
             })
+           
     }
 
-    deleteCard(cardId) {
+    deleteCard(cardId, element) {
         return fetch(`${this._baseUrl}/cards/${cardId}`,
             {
                 method: "DELETE",
                 headers: this._headers,
             })
+            .finally(()=>{
+                element.textContent = "Удаляется..."
+            })
             .then((res) => {
                 res = this.chekAnswer(res)
                 return res
             })
+           
     }
 
     addLikeCard(cardId) {

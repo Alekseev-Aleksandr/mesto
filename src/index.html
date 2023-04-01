@@ -19,7 +19,7 @@
         <section class="profile">
             
             <button class="profile__button profile__button_type_edit-avatar">
-                <img class="profile__avatar-image" src="" alt="Аватар">
+                <img class="profile__avatar-image" src="<%=require('./images/profile-avatar.png')%" alt="Аватар">
             </button>
 
             <div class="profile__info">
@@ -122,9 +122,9 @@
 
                 <div class="popup__items-wrapper">
                     <input class="popup__input popup__input_type_link-avatar" placeholder="Ссылка на картинку" type="url"
-                        id="link-image-input" name="linkImageAvatar" required>
+                        id="link-image-edit-avatar" name="linkImageAvatar" required>
 
-                    <span class="popup__inputs-error link-image-input-error"></span>
+                    <span class="popup__inputs-error link-image-edit-avatar-error"></span>
                 </div>
 
                 <button class="popup__button popup__button_type_save popup__button_active" type="submit"> Cохранить</button>

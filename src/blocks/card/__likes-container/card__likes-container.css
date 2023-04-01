@@ -2,5 +2,5 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    grid-area: button
+    grid-area: button;
 }

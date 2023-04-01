@@ -15,7 +15,7 @@
 }
 
 .profile__button_type_edit-avatar:hover::before{
-    background-color:  rgba(0, 0, 0, 0.8);;
+    background-color:  rgba(0, 0, 0, 0.8);
     opacity: 1;
     transition: .4s;
 }

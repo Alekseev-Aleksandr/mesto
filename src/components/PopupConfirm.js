@@ -5,6 +5,7 @@ export class PopupConfirm extends Popup {
     constructor(selectorPopup, api) {
         super(selectorPopup)
         this._api = api
+        this._element = this._popup.querySelector('.popup__button_type_confirm')
     }
 
     setEventListeners() {
@@ -13,11 +14,12 @@ export class PopupConfirm extends Popup {
     }
 
     delereCardConfirm() {
-        this._api.deleteCard(this._cardId)
+        this._api.deleteCard(this._cardId, this._element)
             .then(() => {
                 newSection.updateSection(userId)
                     .then(() => {
                         this.close()
+                        this._element.textContent = "Да"
                     })
                     .catch(err =>{ 
                         console.log(err);
